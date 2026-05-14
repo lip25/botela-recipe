@@ -13,7 +13,9 @@ body{
     padding:20px;
 }
 
-h1{color:#22c55e;}
+h1{
+    color:#22c55e;
+}
 
 input{
     width:80%;
@@ -23,6 +25,8 @@ input{
     border:none;
     margin-top:10px;
     text-align:center;
+    background:#1e293b;
+    color:white;
 }
 
 button{
@@ -34,6 +38,7 @@ button{
     border-radius:12px;
     background:#22c55e;
     color:white;
+    font-weight:bold;
 }
 
 .result{
@@ -42,6 +47,7 @@ button{
     background:#1e293b;
     border-radius:12px;
     font-size:18px;
+    line-height:1.8;
 }
 </style>
 </head>
@@ -58,7 +64,9 @@ button{
 <button onclick="hitung('matcha')">🍵 Matcha</button>
 <button onclick="hitung('kopisusu')">🥛 Kopi Susu Gula Aren</button>
 
-<div class="result" id="hasil">Masukkan jumlah botol lalu pilih minuman</div>
+<div class="result" id="hasil">
+Masukkan jumlah botol lalu pilih minuman
+</div>
 
 <script>
 
@@ -67,7 +75,8 @@ function hitung(menu){
     let botol = Number(document.getElementById("botol").value);
 
     if(botol <= 0){
-        document.getElementById("hasil").innerHTML="Masukkan jumlah botol dulu!";
+        document.getElementById("hasil").innerHTML =
+        "Masukkan jumlah botol dulu!";
         return;
     }
 
@@ -77,12 +86,15 @@ function hitung(menu){
     // AMERICANO
     // ==========================
     if(menu === "americano"){
+
         let kopi = botol * 3;
         let air = botol * 250;
 
         hasil = `
         <h2>☕ Americano</h2>
+
         Jumlah botol: ${botol}<br><br>
+
         Kopi bubuk: ${kopi} gram<br>
         Air panas: ${air} ml
         `;
@@ -92,6 +104,7 @@ function hitung(menu){
     // MATCHA
     // ==========================
     if(menu === "matcha"){
+
         let matcha = botol * 25;
         let skm = botol * 4;
         let susu = botol * 150;
@@ -99,7 +112,9 @@ function hitung(menu){
 
         hasil = `
         <h2>🍵 Matcha</h2>
+
         Jumlah botol: ${botol}<br><br>
+
         Matcha: ${matcha} gram<br>
         SKM: ${skm} ml<br>
         Susu UHT: ${susu} ml<br>
@@ -109,24 +124,30 @@ function hitung(menu){
 
     // ==========================
     // KOPI SUSU GULA AREN
+    // RESEP NAGIH BOTELA
     // ==========================
     if(menu === "kopisusu"){
-        let kopi = botol * 3;
-        let air = botol * 90;
-        let susu = botol * 140;
-        let skm = botol * 8;
-        let creamer = botol *3;
-        let gula = botol * 15;
+
+        let kopi = botol * 4;
+        let air = botol * 60;
+        let susu = botol * 145;
+        let skm = botol * 5;
+        let creamer = botol * 3;
+        let gula = botol * 18;
 
         hasil = `
         <h2>🥛 Kopi Susu Gula Aren</h2>
+
         Jumlah botol: ${botol}<br><br>
+
         Kopi bubuk: ${kopi} gram<br>
         Air panas: ${air} ml<br>
         Susu UHT: ${susu} ml<br>
         SKM: ${skm} ml<br>
         Creamer: ${creamer} gram<br>
-        Gula aren: ${gula} gram
+        Gula aren: ${gula} gram<br><br>
+
+        ✨ Resep signature creamy balance
         `;
     }
 
