@@ -100,6 +100,10 @@ button:hover{
     text-align:center;
 }
 
+.option-btn{
+    background:#334155;
+}
+
 </style>
 </head>
 
@@ -125,6 +129,10 @@ button:hover{
 
 <button onclick="hitung('kopisusu')">
 🥛 Kopi Susu Gula Aren
+</button>
+
+<button class="option-btn" onclick="hitung('kopisusu_less')">
+🥛 Kopi Susu Aren Less Sugar
 </button>
 
 <div class="result" id="hasil">
@@ -214,7 +222,7 @@ function hitung(menu){
     }
 
     // =========================
-    // KOPI SUSU GULA AREN
+    // KOPI SUSU GULA AREN NORMAL
     // =========================
     if(menu === "kopisusu"){
 
@@ -247,6 +255,43 @@ function hitung(menu){
         <span class="highlight">${gula} gram</span><br><br>
 
         ✨ Creamy • Bold • Signature Botela
+        `;
+    }
+
+    // =========================
+    // LESS SUGAR
+    // =========================
+    if(menu === "kopisusu_less"){
+
+        let ekstrak = botol * 45;
+        let susu = botol * 175;
+        let skm = botol * 3;
+        let creamer = botol * 3;
+        let gula = botol * 18;
+
+        hasil = `
+        <h2>🥛 Kopi Susu Aren Less Sugar</h2>
+
+        Jumlah botol:
+        <span class="highlight">${botol}</span>
+        <br><br>
+
+        Ekstrak kopi moka pot:
+        <span class="highlight">${ekstrak} ml</span><br>
+
+        Susu UHT:
+        <span class="highlight">${susu} ml</span><br>
+
+        SKM:
+        <span class="highlight">${skm} ml</span><br>
+
+        Creamer:
+        <span class="highlight">${creamer} gram</span><br>
+
+        Gula aren:
+        <span class="highlight">${gula} gram</span><br><br>
+
+        ✨ Less Sweet • More Coffee Taste
         `;
     }
 
