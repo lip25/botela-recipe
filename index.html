@@ -2,70 +2,139 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Botela Recipe</title>
+
+<title>BOTELA RECIPE</title>
 
 <style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
 body{
-    font-family: Arial;
+    font-family:Arial;
     background:#0f172a;
     color:white;
-    text-align:center;
     padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:500px;
+    margin:auto;
 }
 
 h1{
     color:#22c55e;
+    margin-bottom:10px;
+    font-size:32px;
+}
+
+.subtitle{
+    color:#94a3b8;
+    margin-bottom:25px;
 }
 
 input{
-    width:80%;
-    padding:14px;
-    font-size:18px;
-    border-radius:10px;
+    width:100%;
+    padding:16px;
     border:none;
-    margin-top:10px;
-    text-align:center;
+    border-radius:14px;
     background:#1e293b;
     color:white;
+    font-size:18px;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+input:focus{
+    outline:none;
+    border:2px solid #22c55e;
 }
 
 button{
-    width:90%;
-    padding:15px;
-    margin:10px;
-    font-size:18px;
+    width:100%;
+    padding:16px;
+    margin-bottom:12px;
     border:none;
-    border-radius:12px;
+    border-radius:14px;
     background:#22c55e;
     color:white;
+    font-size:18px;
     font-weight:bold;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+button:hover{
+    transform:scale(1.02);
 }
 
 .result{
     margin-top:20px;
-    padding:20px;
     background:#1e293b;
-    border-radius:12px;
-    font-size:18px;
-    line-height:1.8;
+    padding:25px;
+    border-radius:18px;
+    text-align:left;
+    line-height:1.9;
+    font-size:17px;
 }
+
+.result h2{
+    color:#22c55e;
+    margin-bottom:15px;
+    text-align:center;
+}
+
+.highlight{
+    color:#22c55e;
+    font-weight:bold;
+}
+
+.footer{
+    margin-top:20px;
+    color:#94a3b8;
+    font-size:14px;
+    text-align:center;
+}
+
 </style>
 </head>
 
 <body>
 
+<div class="container">
+
 <h1>BOTELA RECIPE</h1>
 
-<input type="number" id="botol" placeholder="Jumlah botol">
+<div class="subtitle">
+250ml • Moka Pot Recipe
+</div>
 
-<br>
+<input type="number" id="botol" placeholder="Masukkan jumlah botol">
 
-<button onclick="hitung('americano')">☕ Americano</button>
-<button onclick="hitung('matcha')">🍵 Matcha</button>
-<button onclick="hitung('kopisusu')">🥛 Kopi Susu Gula Aren</button>
+<button onclick="hitung('americano')">
+☕ Americano
+</button>
+
+<button onclick="hitung('matcha')">
+🍵 Matcha
+</button>
+
+<button onclick="hitung('kopisusu')">
+🥛 Kopi Susu Gula Aren
+</button>
 
 <div class="result" id="hasil">
-Masukkan jumlah botol lalu pilih minuman
+Masukkan jumlah botol lalu pilih menu
+</div>
+
+<div class="footer">
+BOTELA • Signature Recipe
+</div>
+
 </div>
 
 <script>
@@ -75,79 +144,109 @@ function hitung(menu){
     let botol = Number(document.getElementById("botol").value);
 
     if(botol <= 0){
-        document.getElementById("hasil").innerHTML =
-        "Masukkan jumlah botol dulu!";
+
+        document.getElementById("hasil").innerHTML = `
+        <h2>⚠️ Error</h2>
+        Masukkan jumlah botol terlebih dahulu
+        `;
+
         return;
     }
 
     let hasil = "";
 
-    // ==========================
+    // =========================
     // AMERICANO
-    // ==========================
+    // =========================
     if(menu === "americano"){
 
-        let kopi = botol * 3;
-        let air = botol * 250;
+        let ekstrak = botol * 65;
+        let air = botol * 185;
 
         hasil = `
         <h2>☕ Americano</h2>
 
-        Jumlah botol: ${botol}<br><br>
+        Jumlah botol:
+        <span class="highlight">${botol}</span>
+        <br><br>
 
-        Kopi bubuk: ${kopi} gram<br>
-        Air panas: ${air} ml
+        Ekstrak kopi moka pot:
+        <span class="highlight">${ekstrak} ml</span><br>
+
+        Air dingin:
+        <span class="highlight">${air} ml</span><br><br>
+
+        ✨ Clean • Bold • No Sugar
         `;
     }
 
-    // ==========================
+    // =========================
     // MATCHA
-    // ==========================
+    // =========================
     if(menu === "matcha"){
 
-        let matcha = botol * 25;
-        let skm = botol * 4;
-        let susu = botol * 150;
-        let air = botol * 80;
+        let matcha = botol * 8;
+        let susu = botol * 180;
+        let skm = botol * 10;
+        let air = botol * 50;
 
         hasil = `
         <h2>🍵 Matcha</h2>
 
-        Jumlah botol: ${botol}<br><br>
+        Jumlah botol:
+        <span class="highlight">${botol}</span>
+        <br><br>
 
-        Matcha: ${matcha} gram<br>
-        SKM: ${skm} ml<br>
-        Susu UHT: ${susu} ml<br>
-        Air panas: ${air} ml
+        Matcha:
+        <span class="highlight">${matcha} gram</span><br>
+
+        Susu UHT:
+        <span class="highlight">${susu} ml</span><br>
+
+        SKM:
+        <span class="highlight">${skm} ml</span><br>
+
+        Air panas:
+        <span class="highlight">${air} ml</span><br><br>
+
+        ✨ Creamy • Sweet • Matcha Balance
         `;
     }
 
-    // ==========================
+    // =========================
     // KOPI SUSU GULA AREN
-    // RESEP NAGIH BOTELA
-    // ==========================
+    // =========================
     if(menu === "kopisusu"){
 
-        let kopi = botol * 4;
-        let air = botol * 70;
-        let susu = botol * 145;
+        let ekstrak = botol * 45;
+        let susu = botol * 170;
         let skm = botol * 5;
         let creamer = botol * 3;
-        let gula = botol * 23;
+        let gula = botol * 27;
 
         hasil = `
         <h2>🥛 Kopi Susu Gula Aren</h2>
 
-        Jumlah botol: ${botol}<br><br>
+        Jumlah botol:
+        <span class="highlight">${botol}</span>
+        <br><br>
 
-        Kopi bubuk: ${kopi} gram<br>
-        Air panas: ${air} ml<br>
-        Susu UHT: ${susu} ml<br>
-        SKM: ${skm} ml<br>
-        Creamer: ${creamer} gram<br>
-        Gula aren: ${gula} gram<br><br>
+        Ekstrak kopi moka pot:
+        <span class="highlight">${ekstrak} ml</span><br>
 
-        ✨ Resep signature creamy balance
+        Susu UHT:
+        <span class="highlight">${susu} ml</span><br>
+
+        SKM:
+        <span class="highlight">${skm} ml</span><br>
+
+        Creamer:
+        <span class="highlight">${creamer} gram</span><br>
+
+        Gula aren:
+        <span class="highlight">${gula} gram</span><br><br>
+
+        ✨ Creamy • Bold • Signature Botela
         `;
     }
 
