@@ -1,16 +1,7 @@
-moka pot 6 cup:
-
-28 gram kopi
-280 ml air
-
-Hasil ekstraksi biasanya sekitar 120-150 ml kopi pekat.
-
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>BOTELA RECIPE</title>
 
 <style>
@@ -122,33 +113,22 @@ button:hover{
 <h1>BOTELA RECIPE</h1>
 
 <div class="subtitle">
-250ml • Moka Pot Recipe
+250ml • Moka Pot 6 Cup Base Recipe
 </div>
 
 <input type="number" id="botol" placeholder="Masukkan jumlah botol">
 
-<button onclick="hitung('americano')">
-☕ Americano
-</button>
-
-<button onclick="hitung('matcha')">
-🍵 Matcha
-</button>
-
-<button onclick="hitung('kopisusu')">
-🥛 Kopi Susu Gula Aren
-</button>
-
-<button class="option-btn" onclick="hitung('kopisusu_less')">
-🥛 Kopi Susu Aren Less Sugar
-</button>
+<button onclick="hitung('americano')">☕ Americano</button>
+<button onclick="hitung('matcha')">🍵 Matcha</button>
+<button onclick="hitung('kopisusu')">🥛 Kopi Susu Gula Aren</button>
+<button class="option-btn" onclick="hitung('kopisusu_less')">🥛 Kopi Susu Aren Less Sugar</button>
 
 <div class="result" id="hasil">
 Masukkan jumlah botol lalu pilih menu
 </div>
 
 <div class="footer">
-BOTELA • Signature Recipe
+BOTELA • Moka Pot 6 Cup System
 </div>
 
 </div>
@@ -159,34 +139,38 @@ function hitung(menu){
 
     let botol = Number(document.getElementById("botol").value);
 
-    if(botol <= 0){
-
+    if(!botol || botol <= 0){
         document.getElementById("hasil").innerHTML = `
         <h2>⚠️ Error</h2>
         Masukkan jumlah botol terlebih dahulu
         `;
-
         return;
     }
 
     let hasil = "";
 
-    // =========================
+    const mokaPot = `
+    Moka pot 6 cup:<br>
+    • 28 gram kopi<br>
+    • 280 ml air<br><br>
+    Hasil ekstraksi biasanya sekitar<br>
+    <span class="highlight">120–150 ml kopi pekat</span><br><br>
+    `;
+
     // AMERICANO
-    // =========================
     if(menu === "americano"){
 
-        let ekstrak = botol * 60;
-        let air = botol * 190;
+        let ekstrak = botol * 45;
+        let air = botol * 205;
 
         hasil = `
         <h2>☕ Americano</h2>
+        ${mokaPot}
 
         Jumlah botol:
-        <span class="highlight">${botol}</span>
-        <br><br>
+        <span class="highlight">${botol}</span><br><br>
 
-        Ekstrak kopi moka pot:
+        Ekstrak kopi:
         <span class="highlight">${ekstrak} ml</span><br>
 
         Air dingin:
@@ -196,22 +180,20 @@ function hitung(menu){
         `;
     }
 
-    // =========================
-    // MATCHA
-    // =========================
+    // MATCHA (ADA SKM)
     if(menu === "matcha"){
 
         let matcha = botol * 25;
         let susu = botol * 150;
         let skm = botol * 4;
-        let air = botol * 80;
+        let air = botol * 71;
 
         hasil = `
         <h2>🍵 Matcha</h2>
+        ${mokaPot}
 
         Jumlah botol:
-        <span class="highlight">${botol}</span>
-        <br><br>
+        <span class="highlight">${botol}</span><br><br>
 
         Matcha:
         <span class="highlight">${matcha} gram</span><br>
@@ -225,36 +207,30 @@ function hitung(menu){
         Air panas:
         <span class="highlight">${air} ml</span><br><br>
 
-        ✨ Creamy • Sweet • Matcha Balance
+        ✨ Creamy • Sweet Matcha Balance
         `;
     }
 
-    // =========================
-    // KOPI SUSU GULA AREN NORMAL
-    // =========================
+    // KOPI SUSU (NO SKM)
     if(menu === "kopisusu"){
 
-        let ekstrak = botol * 60;
-        let susu = botol * 155;
-        let skm = botol * 5;
+        let ekstrak = botol * 45;
+        let susu = botol * 177;
         let creamer = botol * 3;
-        let gula = botol * 27;
+        let gula = botol * 25;
 
         hasil = `
         <h2>🥛 Kopi Susu Gula Aren</h2>
+        ${mokaPot}
 
         Jumlah botol:
-        <span class="highlight">${botol}</span>
-        <br><br>
+        <span class="highlight">${botol}</span><br><br>
 
-        Ekstrak kopi moka pot:
+        Ekstrak kopi:
         <span class="highlight">${ekstrak} ml</span><br>
 
         Susu UHT:
         <span class="highlight">${susu} ml</span><br>
-
-        SKM:
-        <span class="highlight">${skm} ml</span><br>
 
         Creamer:
         <span class="highlight">${creamer} gram</span><br>
@@ -262,36 +238,30 @@ function hitung(menu){
         Gula aren:
         <span class="highlight">${gula} gram</span><br><br>
 
-        ✨ Creamy • Bold • Signature Botela
+        ✨ Signature Coffee
         `;
     }
 
-    // =========================
-    // LESS SUGAR
-    // =========================
+    // LESS SUGAR (NO SKM)
     if(menu === "kopisusu_less"){
 
         let ekstrak = botol * 45;
-        let susu = botol * 175;
-        let skm = botol * 3;
+        let susu = botol * 182;
         let creamer = botol * 3;
-        let gula = botol * 18;
+        let gula = botol * 20;
 
         hasil = `
         <h2>🥛 Kopi Susu Aren Less Sugar</h2>
+        ${mokaPot}
 
         Jumlah botol:
-        <span class="highlight">${botol}</span>
-        <br><br>
+        <span class="highlight">${botol}</span><br><br>
 
-        Ekstrak kopi moka pot:
+        Ekstrak kopi:
         <span class="highlight">${ekstrak} ml</span><br>
 
         Susu UHT:
         <span class="highlight">${susu} ml</span><br>
-
-        SKM:
-        <span class="highlight">${skm} ml</span><br>
 
         Creamer:
         <span class="highlight">${creamer} gram</span><br>
@@ -299,7 +269,7 @@ function hitung(menu){
         Gula aren:
         <span class="highlight">${gula} gram</span><br><br>
 
-        ✨ Less Sweet • More Coffee Taste
+        ✨ Less Sweet • Strong Coffee Taste
         `;
     }
 
