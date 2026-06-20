@@ -1,282 +1,499 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>BOTELA RECIPE</title>
 
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 body{
-    font-family:Arial;
-    background:#0f172a;
-    color:white;
-    padding:20px;
-    text-align:center;
+font-family:Arial;
+background:#0f172a;
+color:white;
+padding:20px;
+text-align:center;
 }
 
 .container{
-    max-width:500px;
-    margin:auto;
+max-width:500px;
+margin:auto;
 }
 
 h1{
-    color:#22c55e;
-    margin-bottom:10px;
-    font-size:32px;
+color:#22c55e;
+margin-bottom:10px;
+font-size:32px;
 }
 
 .subtitle{
-    color:#94a3b8;
-    margin-bottom:25px;
+color:#94a3b8;
+margin-bottom:25px;
 }
 
 input{
-    width:100%;
-    padding:16px;
-    border:none;
-    border-radius:14px;
-    background:#1e293b;
-    color:white;
-    font-size:18px;
-    text-align:center;
-    margin-bottom:20px;
-}
-
-input:focus{
-    outline:none;
-    border:2px solid #22c55e;
+width:100%;
+padding:16px;
+border:none;
+border-radius:14px;
+background:#1e293b;
+color:white;
+font-size:18px;
+text-align:center;
+margin-bottom:20px;
 }
 
 button{
-    width:100%;
-    padding:16px;
-    margin-bottom:12px;
-    border:none;
-    border-radius:14px;
-    background:#22c55e;
-    color:white;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.2s;
-}
-
-button:hover{
-    transform:scale(1.02);
-}
-
-.result{
-    margin-top:20px;
-    background:#1e293b;
-    padding:25px;
-    border-radius:18px;
-    text-align:left;
-    line-height:1.9;
-    font-size:17px;
-}
-
-.result h2{
-    color:#22c55e;
-    margin-bottom:15px;
-    text-align:center;
-}
-
-.highlight{
-    color:#22c55e;
-    font-weight:bold;
-}
-
-.footer{
-    margin-top:20px;
-    color:#94a3b8;
-    font-size:14px;
-    text-align:center;
+width:100%;
+padding:16px;
+margin-bottom:12px;
+border:none;
+border-radius:14px;
+background:#22c55e;
+color:white;
+font-size:18px;
+font-weight:bold;
 }
 
 .option-btn{
-    background:#334155;
+background:#334155;
+}
+
+.result{
+margin-top:20px;
+background:#1e293b;
+padding:25px;
+border-radius:18px;
+text-align:left;
+line-height:1.9;
+font-size:17px;
+}
+
+.result h2{
+color:#22c55e;
+text-align:center;
+}
+
+.highlight{
+color:#22c55e;
+font-weight:bold;
+}
+
+.footer{
+margin-top:20px;
+color:#94a3b8;
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
+
 
 <h1>BOTELA RECIPE</h1>
 
 <div class="subtitle">
-250ml • Moka Pot 6 Cup Base Recipe
+250ml • Hemat HPP System
 </div>
 
-<input type="number" id="botol" placeholder="Masukkan jumlah botol">
 
-<button onclick="hitung('americano')">☕ Americano</button>
-<button onclick="hitung('matcha')">🍵 Matcha</button>
-<button onclick="hitung('kopisusu')">🥛 Kopi Susu Gula Aren</button>
-<button class="option-btn" onclick="hitung('kopisusu_less')">🥛 Kopi Susu Aren Less Sugar</button>
+<input type="number" id="botol" placeholder="Jumlah botol">
+
+
+<button onclick="hitung('americano')">
+☕ Americano
+</button>
+
+
+<button onclick="hitung('matcha')">
+🍵 Matcha
+</button>
+
+
+<button onclick="hitung('kopisusu')">
+🥛 Kopi Susu Gula Aren
+</button>
+
+
 
 <div class="result" id="hasil">
+
 Masukkan jumlah botol lalu pilih menu
+
 </div>
+
 
 <div class="footer">
-BOTELA • Moka Pot 6 Cup System
-</div>
+
+BOTELA • Production System
 
 </div>
+
+
+</div>
+
+
 
 <script>
 
+
 function hitung(menu){
 
-    let botol = Number(document.getElementById("botol").value);
 
-    if(!botol || botol <= 0){
-        document.getElementById("hasil").innerHTML = `
-        <h2>⚠️ Error</h2>
-        Masukkan jumlah botol terlebih dahulu
-        `;
-        return;
-    }
+let botol =
+Number(document.getElementById("botol").value);
 
-    let hasil = "";
 
-    const mokaPot = `
-    Moka pot 6 cup:<br>
-    • 28 gram kopi<br>
-    • 280 ml air<br><br>
-    Hasil ekstraksi biasanya sekitar<br>
-    <span class="highlight">120–150 ml kopi pekat</span><br><br>
-    `;
+if(!botol || botol<=0){
 
-    // AMERICANO
-    if(menu === "americano"){
+document.getElementById("hasil").innerHTML=
 
-        let ekstrak = botol * 45;
-        let air = botol * 205;
+`
+<h2>⚠️ Error</h2>
 
-        hasil = `
-        <h2>☕ Americano</h2>
-        ${mokaPot}
+Masukkan jumlah botol
 
-        Jumlah botol:
-        <span class="highlight">${botol}</span><br><br>
+`;
 
-        Ekstrak kopi:
-        <span class="highlight">${ekstrak} ml</span><br>
+return;
 
-        Air dingin:
-        <span class="highlight">${air} ml</span><br><br>
-
-        ✨ Clean • Bold • No Sugar
-        `;
-    }
-
-    // MATCHA (ADA SKM)
-    if(menu === "matcha"){
-
-        let matcha = botol * 25;
-        let susu = botol * 150;
-        let skm = botol * 4;
-        let air = botol * 71;
-
-        hasil = `
-        <h2>🍵 Matcha</h2>
-        ${mokaPot}
-
-        Jumlah botol:
-        <span class="highlight">${botol}</span><br><br>
-
-        Matcha:
-        <span class="highlight">${matcha} gram</span><br>
-
-        Susu UHT:
-        <span class="highlight">${susu} ml</span><br>
-
-        SKM:
-        <span class="highlight">${skm} ml</span><br>
-
-        Air panas:
-        <span class="highlight">${air} ml</span><br><br>
-
-        ✨ Creamy • Sweet Matcha Balance
-        `;
-    }
-
-    // KOPI SUSU (NO SKM)
-    if(menu === "kopisusu"){
-
-        let ekstrak = botol * 45;
-        let susu = botol * 177;
-        let creamer = botol * 3;
-        let gula = botol * 25;
-
-        hasil = `
-        <h2>🥛 Kopi Susu Gula Aren</h2>
-        ${mokaPot}
-
-        Jumlah botol:
-        <span class="highlight">${botol}</span><br><br>
-
-        Ekstrak kopi:
-        <span class="highlight">${ekstrak} ml</span><br>
-
-        Susu UHT:
-        <span class="highlight">${susu} ml</span><br>
-
-        Creamer:
-        <span class="highlight">${creamer} gram</span><br>
-
-        Gula aren:
-        <span class="highlight">${gula} gram</span><br><br>
-
-        ✨ Signature Coffee
-        `;
-    }
-
-    // LESS SUGAR (NO SKM)
-    if(menu === "kopisusu_less"){
-
-        let ekstrak = botol * 45;
-        let susu = botol * 182;
-        let creamer = botol * 3;
-        let gula = botol * 20;
-
-        hasil = `
-        <h2>🥛 Kopi Susu Aren Less Sugar</h2>
-        ${mokaPot}
-
-        Jumlah botol:
-        <span class="highlight">${botol}</span><br><br>
-
-        Ekstrak kopi:
-        <span class="highlight">${ekstrak} ml</span><br>
-
-        Susu UHT:
-        <span class="highlight">${susu} ml</span><br>
-
-        Creamer:
-        <span class="highlight">${creamer} gram</span><br>
-
-        Gula aren:
-        <span class="highlight">${gula} gram</span><br><br>
-
-        ✨ Less Sweet • Strong Coffee Taste
-        `;
-    }
-
-    document.getElementById("hasil").innerHTML = hasil;
 }
 
+
+
+let hasil="";
+
+
+
+/* AMERICANO */
+
+if(menu==="americano"){
+
+
+let kopi = botol * 2.5;
+
+let air = botol * 250;
+
+
+let hpp =
+(botol*2500);
+
+
+
+hasil=
+
+`
+
+<h2>☕ Americano</h2>
+
+
+Jumlah botol:
+
+<span class="highlight">
+${botol}
+</span>
+
+<br><br>
+
+
+Nescafe:
+
+<span class="highlight">
+${kopi} gram
+</span>
+
+
+<br>
+
+
+Air dingin:
+
+<span class="highlight">
+${air} ml
+</span>
+
+
+<br><br>
+
+
+HPP:
+
+<span class="highlight">
+Rp ${hpp.toLocaleString()}
+</span>
+
+
+<br>
+
+
+HPP / botol:
+
+<span class="highlight">
+Rp 2.500
+</span>
+
+
+<br><br>
+
+✨ Clean • Strong • Low Cost
+
+
+`;
+
+}
+
+
+
+
+
+/* MATCHA */
+
+if(menu==="matcha"){
+
+
+let matcha = botol * 20;
+
+let susu = botol * 150;
+
+let skm = botol * 3;
+
+let air = botol * 75;
+
+
+
+let hpp =
+(botol*5700);
+
+
+
+hasil=
+
+`
+
+<h2>🍵 Matcha</h2>
+
+
+Jumlah botol:
+
+<span class="highlight">
+${botol}
+</span>
+
+
+<br><br>
+
+
+Matcha Mix:
+
+<span class="highlight">
+${matcha} gram
+</span>
+
+
+<br>
+
+
+Susu UHT:
+
+<span class="highlight">
+${susu} ml
+</span>
+
+
+<br>
+
+
+SKM:
+
+<span class="highlight">
+${skm} gram
+</span>
+
+
+<br>
+
+
+Air panas:
+
+<span class="highlight">
+${air} ml
+</span>
+
+
+<br><br>
+
+
+HPP:
+
+<span class="highlight">
+Rp ${hpp.toLocaleString()}
+</span>
+
+
+<br>
+
+
+HPP / botol:
+
+<span class="highlight">
+Rp 5.700
+</span>
+
+
+<br><br>
+
+
+✨ Creamy Matcha
+
+
+`;
+
+}
+
+
+
+
+/* KOPI SUSU */
+
+if(menu==="kopisusu"){
+
+
+
+let kopi = botol * 40;
+
+let susu = botol * 160;
+
+let creamer = botol * 2;
+
+let gula = botol * 20;
+
+let air = botol * 30;
+
+
+
+let hpp =
+
+(botol*7860);
+
+
+
+hasil=
+
+`
+
+<h2>🥛 Kopi Susu Gula Aren</h2>
+
+
+Jumlah botol:
+
+<span class="highlight">
+${botol}
+</span>
+
+
+<br><br>
+
+
+Ekstrak kopi:
+
+<span class="highlight">
+${kopi} ml
+</span>
+
+
+<br>
+
+
+Susu UHT:
+
+<span class="highlight">
+${susu} ml
+</span>
+
+
+<br>
+
+
+Creamer:
+
+<span class="highlight">
+${creamer} gram
+</span>
+
+
+<br>
+
+
+Gula aren:
+
+<span class="highlight">
+${gula} ml
+</span>
+
+
+<br>
+
+
+Air:
+
+<span class="highlight">
+${air} ml
+</span>
+
+
+<br><br>
+
+
+HPP:
+
+<span class="highlight">
+Rp ${hpp.toLocaleString()}
+</span>
+
+
+<br>
+
+
+HPP / botol:
+
+<span class="highlight">
+Rp 7.860
+</span>
+
+
+<br><br>
+
+
+✨ Coffee Milk Signature
+
+
+`;
+
+}
+
+
+
+document.getElementById("hasil").innerHTML=hasil;
+
+
+
+}
+
+
 </script>
+
 
 </body>
 </html>
