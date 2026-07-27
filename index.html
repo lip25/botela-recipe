@@ -2,214 +2,422 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Botela Recipe - Production System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Botela Recipe Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --border-color: rgba(148, 163, 184, 0.2);
+            --primary: #22c55e;
+            --primary-hover: #16a34a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --success-soft: rgba(34, 197, 94, 0.15);
+            --radius-xl: 24px;
+            --radius-lg: 16px;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0f172a;
-            color: #f8fafc;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 10% 10%, rgba(34, 197, 94, 0.15) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(30, 58, 138, 0.2) 0px, transparent 50%);
+            color: var(--text-main);
             padding: 20px;
-            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.6;
         }
 
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            color: #22c55e;
-            margin-bottom: 8px;
-            font-size: 32px;
-            letter-spacing: 1px;
-        }
-
-        .subtitle {
-            color: #94a3b8;
-            margin-bottom: 25px;
-            font-size: 15px;
-        }
-
-        input {
+        .main-container {
             width: 100%;
-            padding: 16px;
-            border: 2px solid #334155;
-            border-radius: 14px;
-            background: #1e293b;
+            max-width: 480px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 10px rgba(34, 197, 94, 0.3);
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        /* Input Card */
+        .input-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.3);
+        }
+
+        .label-group {
+            text-align: left;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .label-group i {
+            color: var(--primary);
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 18px 20px;
+            border: 2px solid transparent;
+            border-radius: var(--radius-lg);
+            background: #0f172a;
             color: white;
             font-size: 18px;
+            font-family: 'Poppins', sans-serif;
             text-align: center;
-            margin-bottom: 15px;
-            outline: none;
-            transition: border-color 0.2s;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
         }
 
-        input:focus {
-            border-color: #22c55e;
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: #1e293b;
+            box-shadow: 0 0 0 4px var(--success-soft);
+        }
+
+        /* Button Group */
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
         }
 
         button {
             width: 100%;
-            padding: 16px;
-            margin-bottom: 12px;
+            padding: 16px 20px;
             border: none;
-            border-radius: 14px;
-            background: #22c55e;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
+            border-radius: var(--radius-lg);
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
             cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
-        }
-
-        button:hover {
-            background: #16a34a;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         button:active {
-            transform: scale(0.98);
+            transform: scale(0.97);
         }
 
-        .option-btn {
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+        }
+
+        .btn-secondary {
             background: #334155;
+            color: var(--text-main);
+            border: 1px solid transparent;
         }
 
-        .option-btn:hover {
+        .btn-secondary:hover {
             background: #475569;
+            border-color: rgba(255,255,255,0.1);
         }
 
-        .result {
-            margin-top: 20px;
-            background: #1e293b;
-            padding: 25px;
-            border-radius: 18px;
+        /* Result Area */
+        .result-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: 30px;
             text-align: left;
             line-height: 1.8;
             font-size: 16px;
-            border: 1px solid #334155;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            display: none; /* Hidden by default */
         }
 
-        .result h2 {
-            color: #22c55e;
+        .result-card.show {
+            opacity: 1;
+            transform: translateY(0);
+            display: block;
+        }
+
+        .result-header {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--success-soft);
+        }
+
+        .result-header h2 {
+            color: var(--primary);
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ingredient-list, .cost-list {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .item-row:last-child {
+            border-bottom: none;
+        }
+
+        .item-name { color: var(--text-muted); }
+        
+        .item-value { 
+            color: var(--text-main); 
+            font-weight: 600;
+            text-align: right;
         }
 
         .highlight {
-            color: #22c55e;
-            font-weight: bold;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.1em;
         }
 
-        .error-title {
-            color: #ef4444 !important;
+        .total-cost-row {
+            margin-top: 10px;
+            padding-top: 15px;
+            border-top: 2px dashed var(--border-color);
+            font-size: 18px;
         }
 
-        .footer {
-            margin-top: 25px;
-            color: #64748b;
+        .tagline {
+            text-align: center;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-top: 20px;
             font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            color: #475569;
+            font-size: 13px;
+        }
+
+        /* Mobile Adjustment */
+        @media (max-width: 400px) {
+            header h1 { font-size: 28px; }
+            .input-card, .result-card { padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>BOTELA RECIPE</h1>
-        <div class="subtitle">
-            250ml • Hemat HPP System
+    <div class="main-container">
+        <header>
+            <h1>Botela</h1>
+            <p>Production Recipe Calculator</p>
+        </header>
+
+        <div class="input-card">
+            <div class="label-group">
+                <span><i class="fas fa-box-open"></i> Jumlah Produksi</span>
+                <span id="bottle-label" style="color:var(--text-muted); font-size:14px;"></span>
+            </div>
+            <input type="number" id="botol" placeholder="Cth: 50" min="1" inputmode="numeric">
+
+            <div class="label-group">
+                <span><i class="fas fa-receipt"></i> Pilih Menu</span>
+            </div>
+            <div class="btn-group">
+                <button class="btn-secondary" onclick="hitung('americano')">
+                    <i class="fas fa-coffee"></i> Americano
+                </button>
+                <button class="btn-secondary" onclick="hitung('matcha')">
+                    <i class="fas fa-leaf"></i> Matcha Latte
+                </button>
+                <button class="btn-primary" onclick="hitung('kopisusu')">
+                    <i class="fas fa-mug-hot"></i> Kopi Susu Aren
+                </button>
+            </div>
         </div>
 
-        <input type="number" id="botol" placeholder="Masukkan jumlah botol" min="1">
-
-        <button onclick="hitung('americano')">☕ Americano</button>
-        <button onclick="hitung('matcha')">🍵 Matcha</button>
-        <button onclick="hitung('kopisusu')">🥛 Kopi Susu Gula Aren</button>
-
-        <div class="result" id="hasil">
-            Masukkan jumlah botol lalu pilih menu di atas.
+        <div class="result-card" id="hasilContainer">
+            <!-- Konten hasil akan diisi oleh JS -->
         </div>
 
-        <div class="footer">
-            BOTELA • Production System &copy; 2026
-        </div>
+        <div class="tagline">"Konsistensi Rasa, Efisiensi Biaya"</div>
     </div>
 
-    <script>
-        function hitung(menu) {
-            let botol = Number(document.getElementById("botol").value);
-            let hasil = "";
+    <footer>
+        BOTELA System &copy; 2024
+    </footer>
 
+    <script>
+        // Update label realtime saat ngetik
+        const inputBotol = document.getElementById('botol');
+        const bottleLabel = document.getElementById('bottle-label');
+        inputBotol.addEventListener('input', function() {
+            if(this.value > 0) {
+                bottleLabel.textContent = `${this.value} Botol @250ml`;
+            } else {
+                bottleLabel.textContent = '';
+            }
+        });
+
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(angka);
+        }
+
+        function hitung(menu) {
+            const botolInput = document.getElementById("botol");
+            const botol = parseInt(botolInput.value);
+            const container = document.getElementById("hasilContainer");
+
+            // Validasi
             if (!botol || botol <= 0) {
-                document.getElementById("hasil").innerHTML = `
-                    <h2 class="error-title">⚠️ Peringatan</h2>
-                    <center>Silakan masukkan jumlah botol terlebih dahulu dengan benar!</center>
+                container.innerHTML = `
+                    <div class="result-header">
+                        <h2 style="color: #ef4444;"><i class="fas fa-exclamation-triangle"></i> Error</h2>
+                    </div>
+                    <p style="text-align:center; color:white;">Masukkan jumlah botol yang valid (minimal 1).</p>
                 `;
+                container.classList.add('show');
+                botolInput.focus();
                 return;
             }
 
+            let data = {};
+
+            // Data Resep (Per Botol 250ml)
             if (menu === "americano") {
-                let kopi = botol * 4;
-                let air = botol * 250;
-                let hpp = botol * 2500;
-
-                hasil = `
-                    <h2>☕ Americano</h2>
-                    Jumlah botol: <span class="highlight">${botol}</span><br><br>
-                    Nescafe: <span class="highlight">${kopi} gram</span><br>
-                    Air dingin: <span class="highlight">${air} ml</span><br><br>
-                    Total HPP: <span class="highlight">Rp ${hpp.toLocaleString('id-ID')}</span><br>
-                    HPP / botol: <span class="highlight">Rp 2.500</span><br><br>
-                    ✨ <em>Clean • Strong • Low Cost</em>
-                `;
+                data = {
+                    title: "Americano",
+                    icon: "fa-coffee",
+                    ingredients: [
+                        { name: "Nescafe Classic", qty: botol * 4, unit: "gram" },
+                        { name: "Air Dingin", qty: botol * 250, unit: "ml" }
+                    ],
+                    hppPerBotol: 2500
+                };
             } else if (menu === "matcha") {
-                let matcha = botol * 23;
-                let susu = botol * 150;
-                let skm = botol * 3;
-                let air = botol * 75;
-                let hpp = botol * 5700;
-
-                hasil = `
-                    <h2>🍵 Matcha</h2>
-                    Jumlah botol: <span class="highlight">${botol}</span><br><br>
-                    Matcha Mix: <span class="highlight">${matcha} gram</span><br>
-                    Susu UHT: <span class="highlight">${susu} ml</span><br>
-                    SKM: <span class="highlight">${skm} gram</span><br>
-                    Air panas: <span class="highlight">${air} ml</span><br><br>
-                    Total HPP: <span class="highlight">Rp ${hpp.toLocaleString('id-ID')}</span><br>
-                    HPP / botol: <span class="highlight">Rp 5.700</span><br><br>
-                    ✨ <em>Creamy Matcha</em>
-                `;
+                data = {
+                    title: "Matcha Latte",
+                    icon: "fa-leaf",
+                    ingredients: [
+                        { name: "Matcha Powder", qty: botol * 23, unit: "gram" },
+                        { name: "Susu UHT", qty: botol * 150, unit: "ml" },
+                        { name: "SKM", qty: botol * 3, unit: "gram" },
+                        { name: "Air Panas", qty: botol * 75, unit: "ml" }
+                    ],
+                    hppPerBotol: 5700
+                };
             } else if (menu === "kopisusu") {
-                let kopi = botol * 40;
-                let susu = botol * 120;
-                let creamer = botol * 10;
-                let gula = botol * 25;
-                let air = botol * 68;
-                let hpp = botol * 7860;
-
-                hasil = `
-                    <h2>🥛 Kopi Susu Gula Aren</h2>
-                    Jumlah botol: <span class="highlight">${botol}</span><br><br>
-                    Ekstrak kopi: <span class="highlight">${kopi} ml</span><br>
-                    Susu UHT: <span class="highlight">${susu} ml</span><br>
-                    Creamer: <span class="highlight">${creamer} gram</span><br>
-                    Gula aren: <span class="highlight">${gula} ml</span><br>
-                    Air: <span class="highlight">${air} ml</span><br><br>
-                    Total HPP: <span class="highlight">Rp ${hpp.toLocaleString('id-ID')}</span><br>
-                    HPP / botol: <span class="highlight">Rp 7.860</span><br><br>
-                    ✨ <em>Coffee Milk Signature</em>
-                `;
+                data = {
+                    title: "Kopi Susu Gula Aren",
+                    icon: "fa-mug-hot",
+                    ingredients: [
+                        { name: "Ekstrak Kopi", qty: botol * 40, unit: "ml" },
+                        { name: "Susu UHT", qty: botol * 120, unit: "ml" },
+                        { name: "Krimer", qty: botol * 10, unit: "gram" },
+                        { name: "Larutan Gula Aren", qty: botol * 25, unit: "ml" },
+                        { name: "Air Tambahan", qty: botol * 68, unit: "ml" }
+                    ],
+                    hppPerBotol: 7860
+                };
             }
 
-            document.getElementById("hasil").innerHTML = hasil;
-        }
-    </script>
-</body>
-</html>
+            const totalHpp = botol * data.hppPerBotol;
+
+            // Render HTML Hasil
+            let ingredientsHtml = data.ingredients.map(item => `
+                <div class="item-row">
+                    <span class="item-name">${item.name}</span>
+                    <span class="item-value">${item.qty.toLocaleString('id-ID')} ${item.unit}</span>
+                </div>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="result-header">
+                    <h2><i class="fas ${data.icon}"></i> ${data.title}</h2>
+                    <p>Untuk ${botol} Botol (250ml)</p>
+                </div>
+
+                <div class="ingredient-list">
+                    <div class="section-title">Kebutuhan Bahan Baku</div>
+                    ${ingredientsHtml}
+                </div>
+
+                <div class="cost-list">
+                    <div class="section-title">Estimasi Biaya</div>
+                    <div class="item-row">
+                        <span class="item-name">HPP per Botol</span>
+                        <span class="item-value">${formatRupiah(data.hppPerBotol)}</span>
+                    </div>
+                    <div class="item-row total-cost-row highlight">
+                        <span class="item-name">Total Estimasi HPP</span>
+                        <span class="item-value">${formatRupiah(totalHpp)}</span>
+                    </div>
+                </div>
+            `;
+
+            // Tampilkan dengan animasi
+        
