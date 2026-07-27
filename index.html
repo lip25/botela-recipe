@@ -283,13 +283,13 @@
             </div>
             <div class="btn-group">
                 <button class="btn-secondary" onclick="hitung('americano')">
-                    <i class="fas fa-coffee"></i> Americano (Gayo)
+                    <i class="fas fa-coffee"></i> Americano (Nescafe)
                 </button>
                 <button class="btn-secondary" onclick="hitung('matcha')">
                     <i class="fas fa-leaf"></i> Matcha Latte
                 </button>
                 <button class="btn-primary" onclick="hitung('kopisusu')">
-                    <i class="fas fa-mug-hot"></i> Kopi Susu Aren
+                    <i class="fas fa-mug-hot"></i> Kopi Susu Aren (Gayo)
                 </button>
             </div>
         </div>
@@ -315,7 +315,7 @@
         });
 
         function formatRupiah(angka) {
-            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(angka);
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(Math.round(angka));
         }
 
         function hitung(menu) {
@@ -335,38 +335,51 @@
                 return;
             }
 
+            // ==========================================
+            // HARGA BAHAN BAKU TERBARU
+            // ==========================================
+            const hargaNescafePerGram = 26000 / 45;      // Rp 577,7 / g
+            const hargaMatchaPerGram = 53000 / 1000;     // Rp 53 / g
+            const hargaSusuUhtPerMl = 23000 / 1000;      // Rp 23 / ml
+            const hargaSkmPerGram = 14000 / 500;         // Rp 28 / g
+            const hargaCreamerPerGram = 60000 / 1000;    // Rp 60 / g
+            const hargaGulaArenPerMl = 20000 / 250;      // Rp 80 / ml (Asumsi 1 blok = 250ml)
+
+            // Hitung HPP Ekstrak Kopi Gayo (Moka Pot 6 Cup, rasio 1:10)
+            const hargaGayoPerGram = 60000 / 200;        // Rp 300 / g
+            const bubukMokaPot = 25;                     // 25 gram kopi
+            const airMokaPot = 250;                      // 250 ml air (hasil ekstrak)
+            // Biaya 250ml ekstrak = 25g x Rp 300 = Rp 7.500
+            // Harga per ml ekstrak = Rp 7.500 / 250ml = Rp 30/ml
+            const hargaEkstrakGayoPerMl = (bubukMokaPot * hargaGayoPerGram) / airMokaPot; 
+
             // Biaya Kemasan Tetap per Botol (Botol 900 + Stiker 350)
             const totalKemasanPerBotol = 900 + 350;
 
             let data = {};
 
             if (menu === "americano") {
-                const hargaKopiPerGram = 60000 / 200; // Rp 300/gram
-                const gramKopi = botol * 4;
-                const biayaBahan = gramKopi * hargaKopiPerGram;
+                const qtyNescafe = botol * 4;
+                const biayaBahan = qtyNescafe * hargaNescafePerGram;
                 const hppPerBotol = (biayaBahan / botol) + totalKemasanPerBotol;
 
                 data = {
-                    title: "Americano (Gayo)",
+                    title: "Americano (Nescafe)",
                     icon: "fa-coffee",
                     ingredients: [
-                        { name: "Biji Kopi Gayo", qty: gramKopi, unit: "gram" },
+                        { name: "Nescafe Classic", qty: qtyNescafe, unit: "gram" },
                         { name: "Air Dingin", qty: botol * 250, unit: "ml" },
                         { name: "Botol & Stiker", qty: botol, unit: "set" }
                     ],
                     hppPerBotol: hppPerBotol
                 };
             } else if (menu === "matcha") {
-                const hargaMatchaPerGram = 53000 / 1000;
-                const hargaUhtPerMl = 23000 / 1000;
-                const hargaSkmPerGram = 14000 / 500;
-
                 const qtyMatcha = botol * 23;
                 const qtySusuUht = botol * 150;
                 const qtySkm = botol * 3;
                 const qtyAir = botol * 75;
 
-                const totalBahan = (qtyMatcha * hargaMatchaPerGram) + (qtySusuUht * hargaUhtPerMl) + (qtySkm * hargaSkmPerGram);
+                const totalBahan = (qtyMatcha * hargaMatchaPerGram) + (qtySusuUht * hargaSusuUhtPerMl) + (qtySkm * hargaSkmPerGram);
                 const hppPerBotol = (totalBahan / botol) + totalKemasanPerBotol;
 
                 data = {
@@ -382,42 +395,29 @@
                     hppPerBotol: hppPerBotol
                 };
             } else if (menu === "kopisusu") {
-                // Konversi Harga Bahan Baku per satuan:
-                // Kopi Gayo: Rp 60.000 / 200g = Rp 300 / gram (Asumsi ekstrak cair menggunakan proporsi gram bubuk kopi ke air)
-                // Susu UHT: Rp 23.000 / 1000ml = Rp 23 / ml
-                // Creamer: Rp 60.000 / 1000g = Rp 60 / gram
-                // Gula Aren Cair: Rp 20.000 / 250ml (asumsi 1 blok cair standar) = Rp 80 / ml
-                const hargaKopiPerGram = 60000 / 200; 
-                const hargaUhtPerMl = 23000 / 1000;
-                const hargaCreamerPerGram = 60000 / 1000;
-                const hargaGulaPerMl = 20000 / 250;
-
-                // Kebutuhan per botol sesuai update baru:
-                // Kopi: 35 ml (dihitung estimasi kebutuhan bubuk kopi gayo, misal 5 gram untuk 35ml ekstrak)
-                // Susu: 120 ml
-                // Creamer: 10 g
-                // Gula Aren: 25 ml
-                // Air: 70 ml
-                const gramKopiEkstrak = botol * 5; 
+                // Kebutuhan resep baru:
+                const qtyKopiEkstrak = botol * 35;
                 const qtySusuUht = botol * 120;
                 const qtyCreamer = botol * 10;
                 const qtyGulaAren = botol * 25;
                 const qtyAir = botol * 70;
-                const qtyKopiMl = botol * 35;
 
-                const biayaKopi = gramKopiEkstrak * hargaKopiPerGram;
-                const biayaSusu = qtySusuUht * hargaUhtPerMl;
+                const biayaKopi = qtyKopiEkstrak * hargaEkstrakGayoPerMl;
+                const biayaSusu = qtySusuUht * hargaSusuUhtPerMl;
                 const biayaCreamer = qtyCreamer * hargaCreamerPerGram;
-                const biayaGula = qtyGulaAren * hargaGulaPerMl;
+                const biayaGula = qtyGulaAren * hargaGulaArenPerMl;
 
                 const totalBahan = biayaKopi + biayaSusu + biayaCreamer + biayaGula;
                 const hppPerBotol = (totalBahan / botol) + totalKemasanPerBotol;
 
+                // Konversi informasi ekstrak kembali ke gram bubuk gayo untuk info resep
+                const gramBubukGayoTotal = (qtyKopiEkstrak / 250) * 25;
+
                 data = {
-                    title: "Kopi Susu Gula Aren",
+                    title: "Kopi Susu Aren (Gayo)",
                     icon: "fa-mug-hot",
                     ingredients: [
-                        { name: "Ekstrak Kopi", qty: qtyKopiMl, unit: "ml" },
+                        { name: `Ekstrak Moka Pot<br><small style="font-size:12px;color:var(--text-muted);font-weight:400;">*(Diseduh dari ${gramBubukGayoTotal}g bubuk Kopi Gayo)</small>`, qty: qtyKopiEkstrak, unit: "ml" },
                         { name: "Susu UHT", qty: qtySusuUht, unit: "ml" },
                         { name: "Creamer Non-Dairy", qty: qtyCreamer, unit: "gram" },
                         { name: "Gula Aren Cair", qty: qtyGulaAren, unit: "ml" },
@@ -465,5 +465,4 @@
         }
     </script>
 </body>
-    </html>
-    
+</html>
