@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Botela Recipe - Production System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,54 +12,41 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #0f172a;
             color: #f8fafc;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
+            text-align: center;
         }
 
         .container {
-            width: 100%;
-            max-width: 480px;
-            background: #1e293b;
-            padding: 30px;
-            border-radius: 24px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            margin: 0 auto;
         }
 
         h1 {
             color: #22c55e;
-            font-size: 28px;
-            font-weight: 700;
             margin-bottom: 8px;
-            text-align: center;
-            letter-spacing: -0.5px;
+            font-size: 32px;
+            letter-spacing: 1px;
         }
 
         .subtitle {
             color: #94a3b8;
-            font-size: 14px;
-            margin-bottom: 24px;
-            text-align: center;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-size: 15px;
         }
 
         input {
             width: 100%;
-            padding: 14px 16px;
+            padding: 16px;
             border: 2px solid #334155;
-            border-radius: 12px;
-            background: #0f172a;
+            border-radius: 14px;
+            background: #1e293b;
             color: white;
-            font-size: 16px;
+            font-size: 18px;
             text-align: center;
+            margin-bottom: 15px;
             outline: none;
             transition: border-color 0.2s;
         }
@@ -69,22 +55,16 @@
             border-color: #22c55e;
         }
 
-        .menu-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
         button {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
+            margin-bottom: 12px;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             background: #22c55e;
             color: white;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: bold;
             cursor: pointer;
             transition: background 0.2s, transform 0.1s;
         }
@@ -97,63 +77,44 @@
             transform: scale(0.98);
         }
 
-        .btn-americano { background: #334155; }
-        .btn-americano:hover { background: #475569; }
-
-        .btn-matcha { background: #334155; }
-        .btn-matcha:hover { background: #475569; }
-
-        .btn-kopisusu { background: #334155; }
-        .btn-kopisusu:hover { background: #475569; }
-
-        /* Tombol aktif/utama */
-        button.primary {
-            background: #22c55e;
+        .option-btn {
+            background: #334155;
         }
-        button.primary:hover {
-            background: #16a34a;
+
+        .option-btn:hover {
+            background: #475569;
         }
 
         .result {
-            background: #0f172a;
-            padding: 20px;
-            border-radius: 16px;
+            margin-top: 20px;
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 18px;
             text-align: left;
             line-height: 1.8;
-            font-size: 15px;
+            font-size: 16px;
             border: 1px solid #334155;
         }
 
         .result h2 {
             color: #22c55e;
             text-align: center;
-            font-size: 20px;
-            margin-bottom: 12px;
-        }
-
-        .row-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 6px;
+            margin-bottom: 15px;
         }
 
         .highlight {
             color: #22c55e;
-            font-weight: 600;
+            font-weight: bold;
         }
 
-        .divider {
-            height: 1px;
-            background: #334155;
-            margin: 12px 0;
+        .error-title {
+            color: #ef4444 !important;
         }
 
         .footer {
-            margin-top: 24px;
+            margin-top: 25px;
             color: #64748b;
-            font-size: 12px;
-            text-align: center;
-            letter-spacing: 0.5px;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -161,40 +122,37 @@
 
     <div class="container">
         <h1>BOTELA RECIPE</h1>
-        <div class="subtitle">250ml • Hemat HPP System</div>
-
-        <div class="input-group">
-            <input type="number" id="botol" placeholder="Masukkan jumlah botol" min="1">
+        <div class="subtitle">
+            250ml • Hemat HPP System
         </div>
 
-        <div class="menu-buttons">
-            <button class="btn-americano" onclick="hitung('americano')">☕ Americano</button>
-            <button class="btn-matcha" onclick="hitung('matcha')">🍵 Matcha</button>
-            <button class="btn-kopisusu" onclick="hitung('kopisusu')">🥛 Kopi Susu Gula Aren</button>
-        </div>
+        <input type="number" id="botol" placeholder="Masukkan jumlah botol" min="1">
 
-        <div class="result" id="hasil" style="text-align: center; color: #94a3b8;">
+        <button onclick="hitung('americano')">☕ Americano</button>
+        <button onclick="hitung('matcha')">🍵 Matcha</button>
+        <button onclick="hitung('kopisusu')">🥛 Kopi Susu Gula Aren</button>
+
+        <div class="result" id="hasil">
             Masukkan jumlah botol lalu pilih menu di atas.
         </div>
 
         <div class="footer">
-            BOTELA • PRODUCTION SYSTEM v1.0
+            BOTELA • Production System &copy; 2026
         </div>
     </div>
 
     <script>
         function hitung(menu) {
-            let botol = parseInt(document.getElementById("botol").value);
+            let botol = Number(document.getElementById("botol").value);
+            let hasil = "";
 
             if (!botol || botol <= 0) {
                 document.getElementById("hasil").innerHTML = `
-                    <h2 style="color: #ef4444;">⚠️ Perhatian</h2>
-                    <p style="text-align: center; color: #cbd5e1;">Silakan masukkan jumlah botol yang valid terlebih dahulu.</p>
+                    <h2 class="error-title">⚠️ Peringatan</h2>
+                    <center>Silakan masukkan jumlah botol terlebih dahulu dengan benar!</center>
                 `;
                 return;
             }
-
-            let hasil = "";
 
             if (menu === "americano") {
                 let kopi = botol * 4;
@@ -203,14 +161,12 @@
 
                 hasil = `
                     <h2>☕ Americano</h2>
-                    <div class="row-item"><span>Jumlah Botol:</span> <span class="highlight">${botol} pcs</span></div>
-                    <div class="divider"></div>
-                    <div class="row-item"><span>Nescafe:</span> <span class="highlight">${kopi} gram</span></div>
-                    <div class="row-item"><span>Air Dingin:</span> <span class="highlight">${air} ml</span></div>
-                    <div class="divider"></div>
-                    <div class="row-item"><span>Total HPP:</span> <span class="highlight">Rp ${hpp.toLocaleString('id-ID')}</span></div>
-                    <div class="row-item"><span>HPP / Botol:</span> <span class="highlight">Rp 2.500</span></div>
-                    <div style="text-align: center; margin-top: 15px; color: #38bdf8; font-size: 14px;">✨ Clean • Strong • Low Cost</div>
+                    Jumlah botol: <span class="highlight">${botol}</span><br><br>
+                    Nescafe: <span class="highlight">${kopi} gram</span><br>
+                    Air dingin: <span class="highlight">${air} ml</span><br><br>
+                    Total HPP: <span class="highlight">Rp ${hpp.toLocaleString('id-ID')}</span><br>
+                    HPP / botol: <span class="highlight">Rp 2.500</span><br><br>
+                    ✨ <em>Clean • Strong • Low Cost</em>
                 `;
             } else if (menu === "matcha") {
                 let matcha = botol * 23;
@@ -221,16 +177,14 @@
 
                 hasil = `
                     <h2>🍵 Matcha</h2>
-                    <div class="row-item"><span>Jumlah Botol:</span> <span class="highlight">${botol} pcs</span></div>
-                    <div class="divider"></div>
-                    <div class="row-item"><span>Matcha Mix:</span> <span class="highlight">${matcha} gram</span></div>
-                    <div class="row-item"><span>Susu UHT:</span> <span class="highlight">${susu} ml</span></div>
-                    <div class="row-item"><span>SKM:</span> <span class="highlight">${skm} gram</span></div>
-                    <div class="row-item"><span>Air Panas:</span> <span class="highlight">${air} ml</span></div>
-                    <div class="divider"></div>
-                    <div class="row-item"><span>Total HPP:</span> <span class="highlight">Rp ${hpp.toLocaleString('id-ID')}</span></div>
-                    <div class="row-item"><span>HPP / Botol:</span> <span class="highlight">Rp 5.700</span></div>
-                    <div style="text-align: center; margin-top: 15px; color: #38bdf8; font-size: 14px;">✨ Creamy Matcha Signature</div>
+                    Jumlah botol: <span class="highlight">${botol}</span><br><br>
+                    Matcha Mix: <span class="highlight">${matcha} gram</span><br>
+                    Susu UHT: <span class="highlight">${susu} ml</span><br>
+                    SKM: <span class="highlight">${skm} gram</span><br>
+                    Air panas: <span class="highlight">${air} ml</span><br><br>
+                    Total HPP: <span class="highlight">Rp ${hpp.toLocaleString('id-ID')}</span><br>
+                    HPP / botol: <span class="highlight">Rp 5.700</span><br><br>
+                    ✨ <em>Creamy Matcha</em>
                 `;
             } else if (menu === "kopisusu") {
                 let kopi = botol * 40;
@@ -242,17 +196,15 @@
 
                 hasil = `
                     <h2>🥛 Kopi Susu Gula Aren</h2>
-                    <div class="row-item"><span>Jumlah Botol:</span> <span class="highlight">${botol} pcs</span></div>
-                    <div class="divider"></div>
-                    <div class="row-item"><span>Ekstrak Kopi:</span> <span class="highlight">${kopi} ml</span></div>
-                    <div class="row-item"><span>Susu UHT:</span> <span class="highlight">${susu} ml</span></div>
-                    <div class="row-item"><span>Creamer:</span> <span class="highlight">${creamer} gram</span></div>
-                    <div class="row-item"><span>Gula Aren:</span> <span class="highlight">${gula} ml</span></div>
-                    <div class="row-item"><span>Air:</span> <span class="highlight">${air} ml</span></div>
-                    <div class="divider"></div>
-                    <div class="row-item"><span>Total HPP:</span> <span class="highlight">Rp ${hpp.toLocaleString('id-ID')}</span></div>
-                    <div class="row-item"><span>HPP / Botol:</span> <span class="highlight">Rp 7.860</span></div>
-                    <div style="text-align: center; margin-top: 15px; color: #38bdf8; font-size: 14px;">✨ Coffee Milk Signature</div>
+                    Jumlah botol: <span class="highlight">${botol}</span><br><br>
+                    Ekstrak kopi: <span class="highlight">${kopi} ml</span><br>
+                    Susu UHT: <span class="highlight">${susu} ml</span><br>
+                    Creamer: <span class="highlight">${creamer} gram</span><br>
+                    Gula aren: <span class="highlight">${gula} ml</span><br>
+                    Air: <span class="highlight">${air} ml</span><br><br>
+                    Total HPP: <span class="highlight">Rp ${hpp.toLocaleString('id-ID')}</span><br>
+                    HPP / botol: <span class="highlight">Rp 7.860</span><br><br>
+                    ✨ <em>Coffee Milk Signature</em>
                 `;
             }
 
